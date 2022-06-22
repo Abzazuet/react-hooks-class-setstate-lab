@@ -7,14 +7,13 @@ class ShoppingList extends React.Component {
     selectedCategory: "All",
     itemsToDisplay: this.props.items
   }
-  handleCategoryChange(e) {
-    console.log(e.target.value)
+  handleCategoryChange = e => {
     this.setState({
       selectedCategory: e.target.value,
-      itemsToDisplay: this.state.itemsToDisplay.filter((item) => {
-        if (this.state.selectedCategory === "All") return true;
+      itemsToDisplay: this.props.items.filter((item) => {
+        if (e.target.value === "All") return true;
 
-        return item.category === this.state.selectedCategory;
+        return item.category === e.target.value;
       })
     })
 
@@ -23,7 +22,7 @@ class ShoppingList extends React.Component {
     return (
       <div className="ShoppingList">
         <div className="Filter">
-          <select name="filter" onChange={(e) => this.handleCategoryChange(e)}>
+          <select name="filter" onChange={this.handleCategoryChange}>
             <option value="All">Filter by category</option>
             <option value="Produce">Produce</option>
             <option value="Dairy">Dairy</option>
